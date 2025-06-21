@@ -318,4 +318,21 @@ function createFeedingRecordHTML(record) {
     `;
 }
 
-// 散歩記録の
+// 散歩記録のHTML作成
+function createWalkRecordHTML(record){
+    const dateObj = new Date(record.date);
+    const formattedDate = `${dateObj.getMonth() + 1}/${dateObj.getDate()}`;
+    
+    return `
+        <div class="record-card walk">
+            <div class="record-header">
+                <div class="record-type">🚶 ${record.location}</div>
+                <div class="record-time">${formattedDate} ${record.time}</div>
+            </div>
+            <div class="record-details">
+                <div><strong>時間:</strong> ${record.duration} 分</div>
+                <div class="record-person">${record.person}</div>
+            </div>
+        </div>
+    `;
+}
