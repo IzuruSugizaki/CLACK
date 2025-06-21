@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シンプルペット記録アプリ</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- ヘッダー部分 -->
+        <header class="header-section">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="app-title">🐕 ペット記録アプリ</h1>
+                    <div class="pet-info">
+                        <span id="petName">ポチ</span>の記録
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 今日の統計 -->
+            <div class="row mt-3">
+                <div class="col-6">
+                    <div class="stat-card">
+                        <div class="stat-number" id="todayFeeding">0</div>
+                        <div class="stat-label">今日の餌やり</div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="stat-card">
+                        <div class="stat-number" id="todayWalk">0</div>
+                        <div class="stat-label">今日の散歩</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 記録追加ボタン部分 -->
+        <section class="action-section">
+            <div class="row mt-4">
+                <div class="col-6">
+                    <button class="btn btn-primary action-btn" onclick="showFeedingModal()">
+                        🍽️ 餌やり記録
+                    </button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-success action-btn" onclick="showWalkModal()">
+                        🚶 散歩記録
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 履歴表示部分 -->
+        <section class="history-section">
+            <div class="row mt-4">
+                <div class="col-12">
+                    <h3>最近の記録</h3>
+                    <div id="recordsList" class="records-list">
+                        <!-- 記録がここに動的に追加される -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 餌やり記録モーダル -->
+    <div class="modal fade" id="feedingModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🍽️ 餌やり記録</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="feedingForm">
+                        <div class="mb-3">
+                            <label class="form-label">時間</label>
+                            <input type="time" class="form-control" id="feedingTime" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">種類</label>
+                            <select class="form-select" id="feedingType" required>
+                                <option value="">選択してください</option>
+                                <option value="朝食">朝食</option>
+                                <option value="昼食">昼食</option>
+                                <option value="夕食">夕食</option>
+                                <option value="おやつ">おやつ</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">量</label>
+                            <input type="text" class="form-control" id="feedingAmount" placeholder="例: 1カップ、100g" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">担当者</label>
+                            <select class="form-select" id="feedingPerson" required>
+                                <option value="">選択してください</option>
+                                <!-- 家族名が動的に追加される -->
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-primary" onclick="addFeedingRecord()">記録する</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 散歩記録モーダル -->
+    <div class="modal fade" id="walkModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🚶 散歩記録</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="walkForm">
+                        <div class="mb-3">
+                            <label class="form-label">時間</label>
+                            <input type="time" class="form-control" id="walkTime" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">散歩時間</label>
+                            <select class="form-select" id="walkDuration" required>
+                                <option value="">選択してください</option>
+                                <option value="15分">15分</option>
+                                <option value="30分">30分</option>
+                                <option value="45分">45分</option>
+                                <option value="60分">60分</option>
+                                <option value="その他">その他</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">場所</label>
+                            <input type="text" class="form-control" id="walkLocation" placeholder="例: 近所の公園" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">担当者</label>
+                            <select class="form-select" id="walkPerson" required>
+                                <option value="">選択してください</option>
+                                <!-- 家族名が動的に追加される -->
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+                    <button type="button" class="btn btn-success" onclick="addWalkRecord()">記録する</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 初期設定モーダル -->
+    <div class="modal fade" id="setupModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">初期設定</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">ペットの名前</label>
+                        <input type="text" class="form-control" id="setupPetName" placeholder="例: ポチ" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">家族の名前（最大4名）</label>
+                        <input type="text" class="form-control mb-2" id="family1" placeholder="1人目" required>
+                        <input type="text" class="form-control mb-2" id="family2" placeholder="2人目">
+                        <input type="text" class="form-control mb-2" id="family3" placeholder="3人目">
+                        <input type="text" class="form-control" id="family4" placeholder="4人目">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="saveInitialSettings()">設定完了</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+body {
+  background-color: lightblue;
+}
+
+li {
+  list-style-type: circle;
+  margin: 10px;
+}
+
+a {
+  color: darkblue;
+  font-size: 15px;
+}
+
+ul {
+  color: darkblue;
+}
