@@ -157,19 +157,6 @@ function showWalkModal() {
     walkModal.show();
 }
 
-//餌槍の入力内容の確認
-/*function validateFeedingInput() {
-    const time = document.getElementById('feedingTime').value;
-    const type = document.getElementById('feedingType').value;
-    const amount = document.getElementById('feedingAmount').value.trim();
-    const person = document.getElementById('feedingPerson').value;
-
-    // バリデーション
-    if (!time || !type || !amount || !person) {
-        alert('すべての項目を入力してください。');
-        return;
-    }
-}*/
 
 // 餌やり記録を追加
 function addFeedingRecord() {
