@@ -182,6 +182,9 @@ function addFeedingRecord() {
         timestamp: new Date().toISOString()
     };
     
+
+    // 確認ダイアログを表示
+    if (confirm(`以下の内容で記録を追加しますか？\n\n種類: ${type}\n時間: ${time}\n量: ${amount}\n担当者: ${person}`)) {
     // 記録を配列に追加
     feedingRecords.unshift(record); // 最新を先頭に
     
@@ -202,6 +205,7 @@ function addFeedingRecord() {
     feedingModal.hide();
     
     console.log('餌やり記録を追加しました:', record);
+ } 
 }
 
 // 散歩記録を追加

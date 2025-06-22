@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日記アプリ</title>
+    <link rel="stylesheet" href="diary_app_css.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 私の日記</h1>
+        </header>
+
+        <main>
+            <!-- 入力フォーム -->
+            <section id="input-section" class="section">
+                <h2>今日の出来事を記録しよう</h2>
+                <form id="diary-form">
+                    <div class="form-group">
+                        <label for="date">日付:</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">タイトル:</label>
+                        <input type="text" id="title" name="title" placeholder="今日のタイトルを入力" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mood">気分:</label>
+                        <select id="mood" name="mood" required>
+                            <option value="">選択してください</option>
+                            <option value="😊">😊 とても良い</option>
+                            <option value="🙂">🙂 良い</option>
+                            <option value="😐">😐 普通</option>
+                            <option value="😞">😞 悪い</option>
+                            <option value="😢">😢 とても悪い</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">内容:</label>
+                        <textarea id="content" name="content" rows="8" placeholder="今日あったことを書いてみよう..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tags">タグ:</label>
+                        <input type="text" id="tags" name="tags" placeholder="例: 仕事, 友達, 趣味 (カンマ区切り)">
+                    </div>
+
+                    <button type="button" onclick="previewEntry()" class="btn btn-primary">内容を確認</button>
+                </form>
+            </section>
+
+            <!-- 確認プレビュー -->
+            <section id="preview-section" class="section" style="display: none;">
+                <h2>入力内容の確認</h2>
+                <div id="preview-content" class="preview-box"></div>
+                <div class="button-group">
+                    <button onclick="confirmSave()" class="btn btn-success">この内容で記録する</button>
+                    <button onclick="cancelPreview()" class="btn btn-secondary">修正する</button>
+                </div>
+            </section>
+
+            <!-- 日記一覧 -->
+            <section id="entries-section" class="section">
+                <h2>これまでの記録</h2>
+                <div class="filter-controls">
+                    <input type="text" id="search" placeholder="検索..." onkeyup="filterEntries()">
+                    <select id="mood-filter" onchange="filterEntries()">
+                        <option value="">すべての気分</option>
+                        <option value="😊">😊 とても良い</option>
+                        <option value="🙂">🙂 良い</option>
+                        <option value="😐">😐 普通</option>
+                        <option value="😞">😞 悪い</option>
+                        <option value="😢">😢 とても悪い</option>
+                    </select>
+                </div>
+                <div id="entries-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="diary_app_js.js"></script>
+</body>
+</html>
