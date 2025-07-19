@@ -1,0 +1,17 @@
+.card{
+  display: flex;
+  width: 280px;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,.2);
+  margin: 10px;
+}
+
+.logbody{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 20px;
+}
+

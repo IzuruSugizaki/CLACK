@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="improved_pet_css.css">
+    <title>ペットのご飯記録</title> 
+  </head>
+  <body>
+    <h1>○○のご飯記録</h1>
+     <div>
+      <form>
+        <label for="date">YYYY/MM/DD</label><input type="date" name="date" id="date" required>
+        <label for="time">00:00</label><input type="time" name="time" id="time" required>
+        <label for="giver">ご飯をあげた人</label><input type="text" name="giver" id="giver" required>
+        <label for="topping">トッピング</label><input type="text" name="topping" id="topping" required>
+        <input type="button" id="button" value="登録">
+      </form>
+    </div>
+    <h2>ご飯記録一覧</h2>
+      <div id="petlist" class="logbody"></div>
+    <script src="Pet.js"></script>
+  </body>
+</html>
